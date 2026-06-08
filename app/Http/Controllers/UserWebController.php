@@ -6,31 +6,39 @@ use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UserWebController extends Controller
 {
     public function index()
     {
+        // return 3;
         $users = User::query()->get();
-        return $this->successResponse("success users", $users);
-        return $users;
+        return view('users.index', compact('users'));
     }
 
-    public function create(){
-        
+
+    public function create()
+    {
+        return view('users.create');
     }
 
     public function store(StoreUserRequest $request)
     {
 
+
         // return $validated;
         // return $request->all();
         $user = User::query()
             ->create($request->all());
-        return response()->json([
-            'message' => "success",
-            'data' => $user
-        ]);
-        return $user;
+
+        // return view('users.index');
+        return redirect()->route('users.index');
+        // $users = User::query()->get();
+        // return view('users.index', compact('users'));
+        // return response()->json([
+        //     'message' => "success",
+        //     'data' => $user
+        // ]);
+        // return $user;
     }
 
     public function update(Request $request, User $user)

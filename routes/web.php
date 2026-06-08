@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserWebController;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -8,6 +9,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('home',function(){
+    $test = 5;
+    return view('home',compact('test'));
+});
+Route::prefix('users')->controller(UserWebController::class)->group(function () {
+    Route::get('/', 'index')->name('users.index');
+
+
+
+    Route::get('/create', 'create')->name('users.create');
+    Route::post('/', 'store')->name('users.store');
+    Route::get('/{user}', 'show');
+    Route::get('/{user}/edit', 'edit');
+    Route::put('/{user}', 'update');
+    Route::delete('/{user}', 'destroy');
+    
+});
 // Route::post('/', function () {
 //     return view('welcome');
 // });
@@ -44,9 +62,9 @@ Route::get('/products', function () {
 // });
 
 
-Route::get('users', function () {
-    User::query()->get();
-});
+// Route::get('users', function () {
+//     User::query()->get();
+// });
 
 Route::get('test', function () {
     return 5;
