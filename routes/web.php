@@ -10,8 +10,11 @@ Route::get('/', function () {
 });
 
 Route::get('home',function(){
-    $test = 5;
-    return view('home',compact('test'));
+    // $test = 5;
+    return view('home');
+});Route::get('dashboard',function(){
+    // $test = 5;
+    return view('dashboard');
 });
 Route::prefix('users')->controller(UserWebController::class)->group(function () {
     Route::get('/', 'index')->name('users.index');
@@ -20,10 +23,12 @@ Route::prefix('users')->controller(UserWebController::class)->group(function () 
 
     Route::get('/create', 'create')->name('users.create');
     Route::post('/', 'store')->name('users.store');
+    // Route::get('/edit', 'edit')->name('users.edit');
+  
     Route::get('/{user}', 'show');
-    Route::get('/{user}/edit', 'edit');
-    Route::put('/{user}', 'update');
-    Route::delete('/{user}', 'destroy');
+    Route::get('/{user}/edit', 'edit')->name('users.edit');
+    Route::put('/{user}', 'update')->name("users.update");
+    Route::delete('/{user}', 'destroy')->name('users.delete');
     
 });
 // Route::post('/', function () {

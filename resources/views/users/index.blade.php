@@ -17,6 +17,7 @@
 
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -24,9 +25,19 @@
                 <tr>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
+                    <td>
+                        <a href="{{ route('users.edit', $user->id) }}">edit</a>
+                        <form action="{{ route('users.delete', $user->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit">delete</button>
+                        </form>
+                        {{-- <a href="{{ route('users.delete',$user->id) }}">delete</a> --}}
+                    </td>
                 </tr>
             @endforeach
-        
+
         </tbody>
     </table>
 </body>

@@ -44,18 +44,30 @@ class UserWebController extends Controller
     public function update(Request $request, User $user)
     {
         $user->update($request->all());
-        return $user;
+        // $users = User::all();
+        // return view('users.index',compact('users'));
+        return redirect()->route('users.index');
+
+        // return $user;
     }
 
 
     public function destroy(User $user)
     {
         $user->delete();
+        return redirect()->route('users.index');
+
     }
 
 
     public function show(User $user)
     {
         return $user;
+    }
+
+    public function edit(User $user)
+    {
+        // return 4;
+        return view('users.edit', compact('user'));
     }
 }
