@@ -5,13 +5,6 @@
             <li class="nav-item">
                 <a href="{{ route('users.index') }}"
                    class="nav-link">
-                    Dashboard
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="{{ route('users.index') }}"
-                   class="nav-link">
                     Users
                 </a>
             </li>
@@ -19,17 +12,11 @@
             <li class="nav-item">
                 <a href="{{ route('users.index') }}"
                    class="nav-link">
-                    Roles
+                    Categories
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a href="{{ route('users.index') }}"
-                   class="nav-link">
-                    Settings
-                </a>
-            </li>
-
+         
         </ul>
     </div>
 </aside>

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -33,9 +36,9 @@ class UserController extends Controller
         return $user;
     }
 
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $user->update($request->all());
+        $user->update($request->validated());
         return $user;
     }
 
@@ -49,5 +52,18 @@ class UserController extends Controller
     public function show(User $user)
     {
         return $user;
+    }
+
+    public function storeCategory(StoreCategoryRequest $request){
+        $validated = $request->validated();
+
+
+       $category = Category::query()->create([
+            'name' => $validated['name'],
+            'content' => $request->content
+        ]);
+
+        return $category;
+
     }
 }

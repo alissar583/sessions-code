@@ -9,10 +9,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('home',function(){
+Route::get('home', function () {
     // $test = 5;
     return view('home');
-});Route::get('dashboard',function(){
+});
+Route::get('dashboard', function () {
     // $test = 5;
     return view('dashboard');
 });
@@ -24,12 +25,11 @@ Route::prefix('users')->controller(UserWebController::class)->group(function () 
     Route::get('/create', 'create')->name('users.create');
     Route::post('/', 'store')->name('users.store');
     // Route::get('/edit', 'edit')->name('users.edit');
-  
+
     Route::get('/{user}', 'show');
     Route::get('/{user}/edit', 'edit')->name('users.edit');
     Route::put('/{user}', 'update')->name("users.update");
     Route::delete('/{user}', 'destroy')->name('users.delete');
-    
 });
 // Route::post('/', function () {
 //     return view('welcome');
@@ -73,4 +73,9 @@ Route::get('/products', function () {
 
 Route::get('test', function () {
     return 5;
+});
+
+
+Route::get('ali', function () {
+    return view('ali');
 });
