@@ -30,6 +30,10 @@ class UserWebController extends Controller
         $user = User::query()
             ->create($request->all());
 
+        // $book->cover()->create([
+        //     'title' => $request->title
+        // ]);
+
         // return view('users.index');
         return redirect()->route('users.index');
         // $users = User::query()->get();
@@ -44,6 +48,8 @@ class UserWebController extends Controller
     public function update(Request $request, User $user)
     {
         $user->update($request->all());
+
+        // Cover::query()->where('book_id',$book->id)->update($request->only(['title']))
         // $users = User::all();
         // return view('users.index',compact('users'));
         return redirect()->route('users.index');
@@ -56,7 +62,6 @@ class UserWebController extends Controller
     {
         $user->delete();
         return redirect()->route('users.index');
-
     }
 
 

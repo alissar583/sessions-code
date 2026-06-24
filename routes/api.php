@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\UserController;
 use App\Models\Category;
+use App\Models\Post;
 use App\Models\Product;
+use App\Models\Profile;
+use App\Models\Role;
 use App\Models\Test;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -135,3 +138,56 @@ Route::prefix('users')->controller(UserController::class)
         Route::put('/{user}', 'update');
         Route::delete('/{user}', 'destroy');
     });
+
+Route::post('store-user-profile', function () {
+    $user = User::query()->create([
+        'name' => "alissa",
+        'email' => "alissa@",
+        'password' => "alissa"
+    ]);
+
+    $user->profile()->create([
+        'age' => 5
+    ]);
+
+    // Profile::query()->create([
+    //     'age' => 5,
+    //     'user_id' => $user->id
+    // ]);
+});
+
+Route::post(
+    'add-comment-to-post',
+    function (Post $post, Request $request) {
+        $post->comments()->create([
+            'content' => $request->content
+        ]);
+    }
+);
+
+Route::post('create-user-and-role-and-attach', function (Request $request) {
+    $user = User::query()->create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => $request->password
+    ]);
+
+    $role = Role::query()->create([
+        'name' => $request->role_name
+    ]);
+
+    $role = Role::query()->create([
+        'name' => $request->role_name_second
+    ]);
+    // $user->roles()->attach([$role->id]);
+
+
+
+    // $user = User::query()->create($request->all());
+    // $user->roles()->sync($request->roles);
+});
+
+Route::post('attach-roles-to-user/{user}', function (Request $request, User $user) {
+    // $user = User::query()->find($request->user_id);
+    $user->roles()->attach($request->roles);
+});
